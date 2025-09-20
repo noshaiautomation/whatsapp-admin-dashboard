@@ -82,10 +82,7 @@ export default function Products() {
   }
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'SAR'
-    }).format(amount)
+    return `﷼${new Intl.NumberFormat('ar-SA').format(amount)}`
   }
 
   const getStockStatus = (quantity: number) => {
