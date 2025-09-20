@@ -84,7 +84,7 @@ export default function Dashboard() {
   }
 
   const formatCurrency = (amount: number) => {
-    return `﷼${new Intl.NumberFormat('ar-SA').format(amount)}`
+    return new Intl.NumberFormat('ar-SA').format(amount)
   }
 
   const getStatusColor = (status: string) => {
