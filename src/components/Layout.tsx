@@ -23,6 +23,7 @@ const menuItems = [
   { id: 'orders', label: 'Orders', icon: ShoppingCart },
   { id: 'customers', label: 'Customers', icon: Users },
   { id: 'products', label: 'Products', icon: Package },
+  { id: 'vendors', label: 'Vendors', icon: Truck },
   { id: 'couriers', label: 'Couriers', icon: Truck },
   { id: 'payments', label: 'Payments', icon: CreditCard },
 ]
