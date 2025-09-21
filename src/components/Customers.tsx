@@ -74,6 +74,9 @@ export default function Customers() {
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ar-SA').format(amount)
+  }
+
+  return (
     <div className="space-y-6">
       {/* Search */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
