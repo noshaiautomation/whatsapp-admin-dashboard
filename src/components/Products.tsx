@@ -83,9 +83,6 @@ export default function Products() {
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ar-SA').format(amount)
-  }
-
-  const getStockStatus = (quantity: number) => {
     if (quantity === 0) {
       return { label: 'Out of Stock', color: 'bg-red-100 text-red-800' }
     } else if (quantity < 10) {

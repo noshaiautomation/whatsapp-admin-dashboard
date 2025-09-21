@@ -85,9 +85,6 @@ export default function Dashboard() {
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ar-SA').format(amount)
-  }
-
-  const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800'
       case 'confirmed': return 'bg-blue-100 text-blue-800'
