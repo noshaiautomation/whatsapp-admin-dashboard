@@ -5,6 +5,7 @@ import Orders from './components/Orders'
 import Customers from './components/Customers'
 import Products from './components/Products'
 import Vendors from './components/Vendors'
+import Couriers from './components/Couriers'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard')
@@ -22,7 +23,7 @@ function App() {
       case 'vendors':
         return <Vendors />
       case 'couriers':
-        return <div className="text-center py-12"><p className="text-gray-500">Couriers management coming soon...</p></div>
+        return <Couriers />
       case 'payments':
         return <div className="text-center py-12"><p className="text-gray-500">Payments management coming soon...</p></div>
       default:

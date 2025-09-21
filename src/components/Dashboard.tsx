@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { ShoppingCart, Users, Package, DollarSign, TrendingUp, TrendingDown } from 'lucide-react'
+import { ShoppingCart, Users, Package, DollarSign, TrendingUp, TrendingDown, Truck } from 'lucide-react'
 
 interface DashboardStats {
   totalOrders: number
   totalCustomers: number
   totalProducts: number
+  totalVendors: number
+  totalCouriers: number
   totalRevenue: number
   pendingOrders: number
   recentOrders: any[]
@@ -16,6 +18,8 @@ export default function Dashboard() {
     totalOrders: 0,
     totalCustomers: 0,
     totalProducts: 0,
+    totalVendors: 0,
+    totalCouriers: 0,
     totalRevenue: 0,
     pendingOrders: 0,
     recentOrders: []
@@ -41,6 +45,16 @@ export default function Dashboard() {
       // Fetch total products
       const { count: productsCount } = await supabase
         .from('products')
+        .select('*', { count: 'exact', head: true })
+
+      // Fetch total vendors
+      const { count: vendorsCount } = await supabase
+        .from('vendors')
+        .select('*', { count: 'exact', head: true })
+
+      // Fetch total couriers
+      const { count: couriersCount } = await supabase
+        .from('couriers')
         .select('*', { count: 'exact', head: true })
 
       // Fetch total revenue
@@ -106,7 +120,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
             <div>
@@ -146,6 +160,34 @@ export default function Dashboard() {
           <div className="mt-4 flex items-center">
             <TrendingDown className="h-4 w-4 text-red-500" />
             <span className="text-sm text-red-600 ml-1">-2% from last month</span>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">Total Vendors</p>
+              <p className="text-3xl font-bold text-gray-900">{stats.totalVendors}</p>
+            </div>
+            <Package className="h-12 w-12 text-orange-600" />
+          </div>
+          <div className="mt-4 flex items-center">
+            <TrendingUp className="h-4 w-4 text-green-500" />
+            <span className="text-sm text-green-600 ml-1">+5% from last month</span>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">Total Couriers</p>
+              <p className="text-3xl font-bold text-gray-900">{stats.totalCouriers}</p>
+            </div>
+            <Truck className="h-12 w-12 text-indigo-600" />
+          </div>
+          <div className="mt-4 flex items-center">
+            <TrendingUp className="h-4 w-4 text-green-500" />
+            <span className="text-sm text-green-600 ml-1">+3% from last month</span>
           </div>
         </div>
 
