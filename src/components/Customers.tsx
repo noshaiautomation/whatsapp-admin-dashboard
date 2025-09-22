@@ -33,7 +33,7 @@ export default function Customers() {
         .from('customers')
         .select(`
           *,
-          addresses (address_line, city, postal_code)
+          addresses!addresses_customer_id_fkey (address_line, city, postal_code)
         `)
         .order('created_at', { ascending: false })
 
