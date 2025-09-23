@@ -77,7 +77,7 @@ export default function Dashboard() {
         .select(`
           *,
           customers (name, phone_number),
-          addresses (city)
+          address_id (city)
         `)
         .order('created_at', { ascending: false })
         .limit(5)
@@ -86,6 +86,8 @@ export default function Dashboard() {
         totalOrders: ordersCount || 0,
         totalCustomers: customersCount || 0,
         totalProducts: productsCount || 0,
+        totalVendors: vendorsCount || 0,
+        totalCouriers: couriersCount || 0,
         totalRevenue,
         pendingOrders: pendingCount || 0,
         recentOrders: recentOrders || []
@@ -99,6 +101,9 @@ export default function Dashboard() {
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ar-SA').format(amount)
+  }
+
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800'
       case 'confirmed': return 'bg-blue-100 text-blue-800'
@@ -251,7 +256,7 @@ export default function Dashboard() {
                     <div className="text-sm text-gray-500">{order.customers?.phone_number}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {order.addresses?.city}
+                    {order.address_id?.city}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {formatCurrency(order.total_amount)}

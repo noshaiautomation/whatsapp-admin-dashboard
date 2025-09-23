@@ -14,7 +14,7 @@ interface Order {
     phone_number: string
     email?: string
   }
-  addresses: {
+  address_id: {
     address_line: string
     city: string
     postal_code: string
@@ -54,7 +54,7 @@ export default function Orders() {
         .select(`
           *,
           customers (name, phone_number, email),
-          addresses (address_line, city, postal_code)
+          address_id (address_line, city, postal_code)
         `)
         .order('created_at', { ascending: false })
 
@@ -120,6 +120,9 @@ export default function Orders() {
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ar-SA').format(amount)
+  }
+
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800'
       case 'confirmed': return 'bg-blue-100 text-blue-800'
@@ -208,8 +211,8 @@ export default function Orders() {
               <div>
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Delivery Address</h3>
                 <div className="text-sm text-gray-900">
-                  <p>{selectedOrder.addresses.address_line}</p>
-                  <p>{selectedOrder.addresses.city}, {selectedOrder.addresses.postal_code}</p>
+                  <p>{selectedOrder.address_id.address_line}</p>
+                  <p>{selectedOrder.address_id.city}, {selectedOrder.address_id.postal_code}</p>
                 </div>
               </div>
 

@@ -8,7 +8,7 @@ interface Customer {
   phone_number: string
   email?: string
   created_at: string
-  addresses?: {
+  default_address_id?: {
     address_line: string
     city: string
     postal_code: string
@@ -33,7 +33,7 @@ export default function Customers() {
         .from('customers')
         .select(`
           *,
-          addresses!addresses_customer_id_fkey (address_line, city, postal_code)
+          default_address_id (address_line, city, postal_code)
         `)
         .order('created_at', { ascending: false })
 
@@ -129,12 +129,12 @@ export default function Customers() {
                     </div>
                   )}
 
-                  {customer.addresses && (
+                  {customer.default_address_id && (
                     <div className="flex items-start text-sm text-gray-600">
                       <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                       <div>
-                        <p>{customer.addresses.address_line}</p>
-                        <p>{customer.addresses.city}, {customer.addresses.postal_code}</p>
+                        <p>{customer.default_address_id.address_line}</p>
+                        <p>{customer.default_address_id.city}, {customer.default_address_id.postal_code}</p>
                       </div>
                     </div>
                   )}
