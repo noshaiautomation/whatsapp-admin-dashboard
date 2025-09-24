@@ -256,7 +256,7 @@ export default function Dashboard() {
                     <div className="text-sm text-gray-500">{order.customers?.phone_number}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {order.address_id?.city}
+                    {order.delivery_address || 'N/A'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {formatCurrency(order.total_amount)}
