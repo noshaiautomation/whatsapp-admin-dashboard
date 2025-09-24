@@ -5,16 +5,14 @@ import { Eye, Filter, Search, Download, ChevronLeft, ChevronRight } from 'lucide
 interface Order {
   order_id: string
   customer_id: string
+  customer_name: string
+  customer_email: string
+  customer_number: string
   delivery_address: string
   status: string
   total_amount: number
   payment_status: string
   created_at: string
-  customers: {
-    name: string
-  }
-}
-
 interface OrderItem {
   order_item_id: string
   quantity: number
@@ -57,7 +55,7 @@ export default function Orders() {
       }
 
       if (searchTerm) {
-        query = query.or(`customers.name.ilike.%${searchTerm}%,customers.phone_number.ilike.%${searchTerm}%`)
+        query = query.or(`customer_name.ilike.%${searchTerm}%,customer_number.ilike.%${searchTerm}%`)
       }
 
       const { data, error, count } = await query
