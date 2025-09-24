@@ -357,8 +357,11 @@ export default function Orders() {
                         #{order.order_id.slice(-8)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{order.customers.name}</div>
-                        <div className="text-sm text-gray-500">{order.customers.phone_number}</div>
+                        <div className="text-sm font-medium text-gray-900">{order.customer_name}</div>
+                        <div className="text-sm text-gray-500">{order.customer_number}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {order.delivery_address}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {formatCurrency(order.total_amount)}
