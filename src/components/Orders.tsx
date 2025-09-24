@@ -210,7 +210,7 @@ export default function Orders() {
               <div>
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Delivery Address</h3>
                 <div className="text-sm text-gray-900">
-                  <p>{selectedOrder.delivery_address || 'No address provided'}</p>
+                  <p>{selectedOrder.delivery_address}</p>
                 </div>
               </div>
 
@@ -368,7 +368,7 @@ export default function Orders() {
                         <div className="text-sm text-gray-500">{order.customers.phone_number}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {order.delivery_address || 'No address'}
+                        {order.delivery_address}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {formatCurrency(order.total_amount)}
