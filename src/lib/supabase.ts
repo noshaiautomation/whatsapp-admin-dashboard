@@ -72,7 +72,7 @@ export type Database = {
         Row: {
           order_id: string
           customer_id: string
-          address_id: string
+          delivery_address: string
           status: 'pending' | 'confirmed' | 'dispatched' | 'delivered' | 'cancelled'
           total_amount: number
           payment_status: 'pending' | 'paid' | 'failed' | 'refunded'

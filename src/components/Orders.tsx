@@ -5,19 +5,13 @@ import { Eye, Filter, Search, Download, ChevronLeft, ChevronRight } from 'lucide
 interface Order {
   order_id: string
   customer_id: string
+  delivery_address: string
   status: string
   total_amount: number
   payment_status: string
   created_at: string
   customers: {
     name: string
-    phone_number: string
-    email?: string
-  }
-  address_id: {
-    address_line: string
-    city: string
-    postal_code: string
   }
 }
 
@@ -53,7 +47,7 @@ export default function Orders() {
         .from('orders')
         .select(`
           *,
-          customers (name, phone_number, email),
+          customers (name, phone_number, email)
           address_id (address_line, city, postal_code)
         `)
         .order('created_at', { ascending: false })
@@ -211,8 +205,7 @@ export default function Orders() {
               <div>
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Delivery Address</h3>
                 <div className="text-sm text-gray-900">
-                  <p>{selectedOrder.address_id.address_line}</p>
-                  <p>{selectedOrder.address_id.city}, {selectedOrder.address_id.postal_code}</p>
+                  <p>{selectedOrder.delivery_address || 'No address provided'}</p>
                 </div>
               </div>
 
