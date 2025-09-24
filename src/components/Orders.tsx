@@ -62,7 +62,7 @@ export default function Orders() {
       }
 
       if (searchTerm) {
-        query = query.or(`customers.name.ilike.%${searchTerm}%,customers.phone_number.ilike.%${searchTerm}%`)
+        query = query.or(`customer_name.ilike.%${searchTerm}%,customer_number.ilike.%${searchTerm}%`)
       }
 
       const { data, error, count } = await query
