@@ -13,7 +13,13 @@ interface Order {
   total_amount: number
   payment_status: string
   created_at: string
+  customers: {
+    name: string
+    phone_number: string
+    email: string
+  }
 }
+
 interface OrderItem {
   order_item_id: string
   quantity: number
@@ -44,7 +50,10 @@ export default function Orders() {
       setLoading(true)
       let query = supabase
         .from('orders')
-        .select('*')
+        .select(`
+          *,
+          customers (name, phone_number, email),
+          address_id (address_line, city, postal_code)
         `)
         .order('created_at', { ascending: false })
 
@@ -53,7 +62,7 @@ export default function Orders() {
       }
 
       if (searchTerm) {
-        query = query.or(\`customers.name.ilike.%${searchTerm}%,customers.phone_number.ilike.%${searchTerm}%`)
+        query = query.or(`customers.name.ilike.%${searchTerm}%,customers.phone_number.ilike.%${searchTerm}%`)
       }
 
       const { data, error, count } = await query
@@ -358,6 +367,9 @@ export default function Orders() {
                         <div className="text-sm font-medium text-gray-900">{order.customers.name}</div>
                         <div className="text-sm text-gray-500">{order.customers.phone_number}</div>
                       </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {order.delivery_address || 'No address'}
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {formatCurrency(order.total_amount)}
                       </td>
@@ -439,7 +451,4 @@ export default function Orders() {
       </div>
     </div>
   )
-}
-    }
-  }
 }
